@@ -1,13 +1,23 @@
-node{
-    stages{
-        stage{'listing'}{
-        sh 'li' 
+pipeline {
+    agent any
+    stages {
+        stage('git checkout') {
+            steps {
+                checkout([$class: 'GitSCM',
+                          branches: [[name: 'feature/sumesh']],
+                          userRemoteConfigs: [[credentialsId: 'bcc02395-b9e0-490f-abb1-b00bdf3cad0d',
+                                               url: 'https://github.com/devopsengineer-np/static-website.git']]])
+            }
         }
-        stage{'list all'}{
-        sh 'li -al' 
+        stage('list all') {
+            steps {
+                sh 'ls -al'
+            }
         }
-        stage{'display index.html file contents'}{
-        sh 'cat index.html' 
+        stage('display') {
+            steps {
+                sh 'cat index.html'
+            }
         }
     }
 }
