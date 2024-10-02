@@ -1,6 +1,6 @@
 node{
     checkout scm;
-    def webDirectory = '/var/www/html'
+    //def webDirectory = '/var/www/html'
     stage('Install nginx'){
         echo 'Check if Nginx is installed'
         def nginxInstalled = sh(script: 'which nginx', returnStatus: true) == 0
@@ -16,8 +16,9 @@ node{
    }
     stage('Deployment of Website'){
         sh '''
-        sudo rm -rf ${webDirectory}/*
-        sudo cp -r * ${webDirectory}/
+        sudo cd /var/www/html/
+        sudo rm -rf  *
+        sudo cp -r * /var/www/html/
         '''
         echo 'Website Deployed'
     }
