@@ -16,8 +16,6 @@ node{
    }
     stage('Deployment of Website'){
         sh '''
-        sudo cd /var/www/html/
-        sudo rm -rf  *
         sudo cp -r * /var/www/html/
         '''
         echo 'Website Deployed'
